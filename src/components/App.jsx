@@ -1,33 +1,69 @@
-import { PhoneBook } from './PhoneBook/PhoneBook';
-import { ContactList } from './ContactList/ContactList';
-import { Filter } from './Filter/Filter';
-import { StyledPhoneBook } from './PhoneBook/PhoneBook.styled';
-import { GlobalStyle } from './GlobalStyle';
-import { getContacts } from 'store/PhoneBook/phoneBookSlice';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { fetchContacts } from 'store/PhoneBook/operations';
+import { lazy, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { Route, Routes } from 'react-router-dom';
+import Layout from './Layout';
+import { refresh } from 'redux/auth/authOperations';
+import { useAuth } from 'hooks';
+import { PrivateRoute } from './PrivateRoute.js';
+import { RestrictedRoute } from './RestrictedRoute';
+
+import LoadingSpinnerComponent from 'react-spinners-components';
+
+const HomePage = lazy(() => import('../pages/Home'));
+const RegisterPage = lazy(() => import('../pages/Register'));
+const LoginPage = lazy(() => import('../pages/Login'));
+const ContactsPage = lazy(() => import('../pages/Contacts'));
+
+const ContactEditPage = lazy(() => import('../pages/ContactEdit'));
+const NotFoundPage = lazy(() => import('../pages/NotFoundPage'));
 
 export const App = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(getContacts);
+  const { isRefreshing } = useAuth();
+
   useEffect(() => {
-    dispatch(fetchContacts());
+    dispatch(refresh());
   }, [dispatch]);
 
-  return (
-    <StyledPhoneBook>
-      <h1>Phonebook</h1>
-      <PhoneBook />
-
-      {contacts.length !== 0 && (
-        <>
-          <h2>Contacts</h2>
-          <Filter />
-          <ContactList />
-        </>
-      )}
-      <GlobalStyle />
-    </StyledPhoneBook>
+  return isRefreshing ? (
+    <LoadingSpinnerComponent type={'Gear'} color={'black'} size={'220px'} />
+  ) : (
+    <>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<HomePage />} />
+          <Route
+            path="/register"
+            element={
+              <RestrictedRoute redirectTo="/" component={<RegisterPage />} />
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <RestrictedRoute redirectTo="/" component={<LoginPage />} />
+            }
+          />
+          <Route
+            path="/contacts"
+            element={
+              <PrivateRoute redirectTo="/" component={<ContactsPage />} />
+            }
+          />
+          <Route
+            path="/contacts/:contactId"
+            element={
+              <PrivateRoute
+                redirectTo="/contacts"
+                component={<ContactEditPage />}
+              />
+            }
+          />
+         
+          <Route path="*" element={<NotFoundPage />} />
+        </Route>
+      </Routes>
+      
+    </>
   );
 };
