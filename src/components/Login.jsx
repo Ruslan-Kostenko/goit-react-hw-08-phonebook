@@ -1,8 +1,7 @@
-import { ErrorMessage, Field, Formik,Form } from 'formik';
+import { ErrorMessage, Field, Formik, Form } from 'formik';
 import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
-import { logIn } from 'redux/auth/authOperations';
-
+import { logIn } from 'redux/Auth/authOperations';
 
 const formSchema = Yup.object({
   email: Yup.string().email().required('Must be filled'),
@@ -20,7 +19,7 @@ export const LoginForm = () => {
       validationSchema={formSchema}
       onSubmit={(values, actions) => {
         dispatch(logIn({ ...values }));
-        // actions.resetForm();
+        actions.resetForm();
       }}
     >
       <Form autoComplete="off">

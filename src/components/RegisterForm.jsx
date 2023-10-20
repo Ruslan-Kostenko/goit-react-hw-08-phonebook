@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 
 
 import { Link } from 'react-router-dom';
-import { register } from 'redux/auth/authOperations';
+import { register } from 'redux/Auth/authOperations';
 
 
 const formSchema = Yup.object({

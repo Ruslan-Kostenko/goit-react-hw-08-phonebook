@@ -1,9 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { FilterInput } from './Filter.styled';
-import { changeFilter, getFilter } from 'store/PhoneBook/filterSlice';
+import { changeFilter } from 'redux/PhoneBook/filterSlice';
+import { selectFilter } from 'redux/PhoneBook/selectors';
 
 export const Filter = () => {
-const phoneFilter = useSelector(getFilter);
+const phoneFilter = useSelector(selectFilter);
 const dispatch = useDispatch();
 
   return (

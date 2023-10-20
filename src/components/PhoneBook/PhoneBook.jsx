@@ -2,8 +2,9 @@ import { Formik, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { FormBtn, Label, StyledField } from './PhoneBook.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { getContacts } from 'store/PhoneBook/phoneBookSlice';
-import { fetchAddContact } from 'store/PhoneBook/operations';
+
+import { fetchAddContact } from 'redux/PhoneBook/operations';
+import { selectContacts } from 'redux/PhoneBook/selectors';
 
 const schema = Yup.object().shape({
   name: Yup.string()
@@ -11,7 +12,7 @@ const schema = Yup.object().shape({
     .required('This is required!')
     .min(1, 'Too Short!')
     .max(50, 'Too Long!'),
-  phone: Yup.string()
+  number: Yup.string()
     .matches(/^\+?[0-9]{1,3}-?[0-9]+$/, 'Invalid number')
     .required('This is required!')
     .min(6, 'Too Short!')
@@ -19,14 +20,14 @@ const schema = Yup.object().shape({
 });
 
 export const PhoneBook = () => {
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(selectContacts);
   const dispatch = useDispatch();
 
   return (
     <Formik
       initialValues={{
         name: '',
-        phone: '',
+        number: '',
       }}
       validationSchema={schema}
       onSubmit={(values, actions) => {
@@ -51,10 +52,10 @@ export const PhoneBook = () => {
           <ErrorMessage name="name" component="div" />
         </Label>
 
-        <Label htmlFor="phone">
-          phone
-          <StyledField name="phone" placeholder="phone" />
-          <ErrorMessage name="phone" component="div" />
+        <Label htmlFor="number">
+          number
+          <StyledField name="number" placeholder="number" />
+          <ErrorMessage name="number" component="div" />
         </Label>
 
         <FormBtn type="submit">Add contact</FormBtn>

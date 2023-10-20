@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Helmet } from 'react-helmet';
-import { fetchContacts } from 'redux/contacts/operations';
+import { fetchContacts } from 'redux/PhoneBook/operations';
 import { Toaster } from 'react-hot-toast';
-import { PhoneList } from 'components/Phonelist/PhoneList';
-import { ContactForm } from 'components/ContactForm/ContactForm';
+import { ContactList } from 'components/ContactList/ContactList';
+import { PhoneBook } from 'components/PhoneBook/PhoneBook';
+
 import { Filter } from 'components/Filter/Filter';
-import CountOfContacts from 'components/Header/Counter';
-import { selectTotalContacts } from 'redux/contacts/selectors';
+import { selectTotalContacts } from 'redux/PhoneBook/selectors';
 import Message from 'components/Message';
 
 export default function Contacts() {
@@ -23,14 +23,13 @@ export default function Contacts() {
       <Helmet title="Your contacts" />
 
       <h1>Phonebook</h1>
-      <ContactForm />
+      <PhoneBook />
       <h2>Contacts</h2>
-      <CountOfContacts />
       <Filter />
       {contactsLength === 0 ? (
-        <Message message="Oops! Contact's list is empty..." />
+        <Message message="Sorry! Contacts list is empty..." />
       ) : (
-        <PhoneList />
+        <ContactList/>
       )}
 
       <Toaster />

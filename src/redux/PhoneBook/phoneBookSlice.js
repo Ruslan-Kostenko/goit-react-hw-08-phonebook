@@ -7,7 +7,7 @@ import {
   fetchEditContact,
 } from './operations';
 
-const toastLoading = toast.loading('', { position: 'top-right' });
+export const toastLoading = toast.loading('', { position: 'top-right' });
 
 const onPending = state => {
   state.isLoading = true;

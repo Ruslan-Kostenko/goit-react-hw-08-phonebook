@@ -5,10 +5,13 @@ import { NavLink, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { ErrorMessage, Field, Formik,Form } from 'formik';
 import * as Yup from 'yup';
 import { RiArrowLeftCircleFill } from 'react-icons/ri';
-import { fetchEditContact } from 'redux/contacts/operations';
-import { selectContacts } from 'redux/contacts/selectors';
+
+
 import { toast, Toaster } from 'react-hot-toast';
-import { toastLoading } from 'redux/contacts/contactsSlice';
+import { toastLoading } from 'redux/PhoneBook/phoneBookSlice';
+import { selectContacts } from 'redux/PhoneBook/selectors';
+import { fetchEditContact } from 'redux/PhoneBook/operations';
+
 
 
 const formSchema = Yup.object().shape({

@@ -2,12 +2,13 @@ import { lazy, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import Layout from './Layout';
-import { refresh } from 'redux/auth/authOperations';
+import { refresh } from 'redux/Auth/authOperations';
 import { useAuth } from 'hooks';
-import { PrivateRoute } from './PrivateRoute.js';
+import { PrivateRoute } from './PrivateRoute.jsx';
 import { RestrictedRoute } from './RestrictedRoute';
 
 import LoadingSpinnerComponent from 'react-spinners-components';
+import { GlobalStyle } from './GlobalStyle';
 
 const HomePage = lazy(() => import('../pages/Home'));
 const RegisterPage = lazy(() => import('../pages/Register'));
@@ -63,6 +64,7 @@ export const App = () => {
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
+      <GlobalStyle/>
       
     </>
   );

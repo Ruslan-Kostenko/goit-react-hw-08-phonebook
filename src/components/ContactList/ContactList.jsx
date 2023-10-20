@@ -1,12 +1,11 @@
 import { useSelector } from 'react-redux';
-import { getFilter } from 'store/PhoneBook/filterSlice';
-import { getContacts } from 'store/PhoneBook/phoneBookSlice';
 import { ContactItem } from '../ContactItem/ContactItem';
+import { selectContacts, selectFilter } from 'redux/PhoneBook/selectors';
 
 
 export const ContactList = () => {
-  const contacts = useSelector(getContacts);
-  const filter = useSelector(getFilter);
+  const contacts = useSelector(selectContacts);
+  const filter = useSelector(selectFilter);
 
   const getFiltered = () =>
     contacts.filter(contact =>
@@ -23,7 +22,7 @@ export const ContactList = () => {
             key={contact.id}
             id={contact.id}
             name={contact.name}
-            number={contact.phone}
+            number={contact.number}
           ></ContactItem>
         );
       })}
