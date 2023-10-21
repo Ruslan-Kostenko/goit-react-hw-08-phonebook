@@ -1,6 +1,5 @@
 import { Helmet } from 'react-helmet';
 import { useAuth } from 'hooks';
-import { GiOldMicrophone } from 'react-icons/gi';
 import Register from './Register';
 
 
@@ -27,8 +26,6 @@ export default function Home() {
             It's your
           </b>
           <h2 style={{ fontSize: 44 }}>Phonebook Organizer</h2>
-
-          <GiOldMicrophone />
           
         </div>
       )}
