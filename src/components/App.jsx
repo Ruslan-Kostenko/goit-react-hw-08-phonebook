@@ -27,7 +27,7 @@ export const App = () => {
   }, [dispatch]);
 
   return isRefreshing ? (
-    <LoadingSpinnerComponent type={'Gear'} color={'black'} size={'220px'} />
+    <LoadingSpinnerComponent type={'Spinner'} color={'teal'} size={'200px'}/>
   ) : (
     <>
       <Routes>

@@ -15,7 +15,7 @@ export default function Home() {
         <Register />
       ) : (
         <div>
-          <h1 style={{ fontSize: 44 }}>WELCOME !!!</h1>
+          <h1 style={{ fontSize: 44 }}>WELCOME!</h1>
           <b
             style={{
               display: 'inline-block',

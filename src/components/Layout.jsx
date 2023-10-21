@@ -11,9 +11,9 @@ export default function Layout() {
       <Suspense
         fallback={
           <LoadingSpinnerComponent
-            type={'Gear'}
-            color={'black'}
-            size={'220px'}
+            type={'Spinner'}
+            color={'teal'}
+            size={'200px'}
           />
         }
       >
