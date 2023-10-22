@@ -1,12 +1,8 @@
 import { Helmet } from 'react-helmet';
-import { useAuth } from 'hooks';
-
 
 
 export default function Home() {
-  const { isLoggedIn } = useAuth();
-
-  return (
+    return (
     <>
       <Helmet title="Phonebook" />
 
