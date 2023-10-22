@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet';
 import { useAuth } from 'hooks';
-import Register from './Register';
+
 
 
 export default function Home() {
@@ -10,9 +10,7 @@ export default function Home() {
     <>
       <Helmet title="Phonebook" />
 
-      {!isLoggedIn ? (
-        <Register />
-      ) : (
+      
         <div>
           <h1 style={{ fontSize: 44 }}>WELCOME!</h1>
           <b
@@ -28,7 +26,6 @@ export default function Home() {
           <h2 style={{ fontSize: 44 }}>Phonebook Organizer</h2>
           
         </div>
-      )}
     </>
   );
 }
